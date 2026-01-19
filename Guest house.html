@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cozy Guesthouse - Rooms & Bookings</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f9f9f9; color: #333; }
+        header { background-color: #2c3e50; color: white; text-align: center; padding: 30px 20px; }
+        nav { background-color: #34495e; padding: 10px; text-align: center; }
+        nav a { color: white; margin: 0 20px; text-decoration: none; font-weight: bold; }
+        nav a:hover { text-decoration: underline; }
+        .container { max-width: 1200px; margin: 20px auto; padding: 20px; background: white; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        .rooms { display: flex; flex-wrap: wrap; justify-content: space-around; }
+        .room { width: 30%; margin: 10px; padding: 15px; border: 1px solid #ddd; border-radius: 8px; text-align: center; }
+        .room img { max-width: 100%; height: 200px; object-fit: cover; border-radius: 5px; }
+        .room h3 { margin: 10px 0; }
+        .room p { font-size: 14px; }
+        button { background-color: #e74c3c; color: white; padding: 10px 15px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; margin: 5px; }
+        button:hover { background-color: #c0392b; }
+        input[type="file"] { margin: 10px 0; }
+        form { max-width: 500px; margin: 0 auto; }
+        input, textarea { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        footer { text-align: center; padding: 15px; background-color: #2c3e50; color: white; margin-top: 20px; }
+        @media (max-width: 768px) { .room { width: 100%; } }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome to Cozy Guesthouse</h1>
+        <p>Relax in our beautiful rooms. Browse, book, and contact us today!</p>
+    </header>
+    <nav>
+        <a href="#rooms">Rooms</a>
+        <a href="#contact">Contact & Book</a>
+    </nav>
+    
+    <div id="rooms" class="container">
+        <h2>Our Rooms</h2>
+        <div class="rooms">
+            <div class="room">
+                <img id="img1" src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200&q=80" alt="Standard Room">
+                <h3>Standard Room</h3>
+                <p>Comfortable queen bed, Wi-Fi, bathroom. $80/night.</p>
+                <input type="file" id="file1" accept="image/*" onchange="previewImage('file1', 'img1')">
+                <button onclick="bookRoom('Standard')">Book Now</button>
+            </div>
+            <div class="room">
+                <img id="img2" src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200&q=80" alt="Deluxe Room">
+                <h3>Deluxe Room</h3>
+                <p>Two beds, balcony, kitchenette. $120/night.</p>
+                <input type="file" id="file2" accept="image/*" onchange="previewImage('file2', 'img2')">
+                <button onclick="bookRoom('Deluxe')">Book Now</button>
+            </div>
+            <div class="room">
+                <img id="img3" src="https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200&q=80" alt="Luxury Suite">
+                <h3>Luxury Suite</h3>
+                <p>King bed, living area, views. $150/night.</p>
+                <input type="file" id="file3" accept="image/*" onchange="previewImage('file3', 'img3')">
+                <button onclick="bookRoom('Suite')">Book Now</button>
+            </div>
+        </div>
+    </div>
+    
+    <div id="contact" class="container">
+        <h2>Contact Us for Bookings</h2>
+        <form id="contactForm">
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <input type="tel" placeholder="Phone Number">
+            <input type="date" placeholder="Check-in Date" required>
+            <input type="date" placeholder="Check-out Date" required>
+            <textarea placeholder="Room preference or special requests" rows="4"></textarea>
+            <button type="submit">Submit Booking Request</button>
+        </form>
+        <p style="text-align: center; margin-top: 20px;">
+            <strong>Direct Contact:</strong><br>
+            Email: info@cozyguesthouse.com<br>
+            Phone: 7798275439 / 8552967764<br>
+            Address: 123 Mountain Road, Scenic Town, USA
+        </p>
+    </div>
+    
+    <footer>
+        <p>&copy; 2023 Cozy Guesthouse. All rights reserved.</p>
+    </footer>
+    
+    <script>
+        function bookRoom(roomType) {
+            alert(`You've selected the ${roomType} room. Please fill out the contact form below to confirm your booking!`);
+        }
+        
+        function previewImage(fileId, imgId) {
+            const file = document.getElementById(fileId).files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById(imgId).src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+        
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you! Your booking request has been submitted. We\'ll get back to you soon.');
+            // To make this send real emails, integrate Formspree or similar (free).
+        });
+    </script>
+</body>
+</html>
